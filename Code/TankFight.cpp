@@ -230,9 +230,9 @@ bool Game_init(HWND hwnd,HINSTANCE hinstance)
 	g_hRoundBG[8] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_09));
 	g_hRoundBG[9] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_10));
 	g_hRoundBG[10] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_11));
-	g_hRoundBG[11] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_12));
-	g_hRoundBG[12] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_13));
-	g_hRoundBG[13] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_14));
+	//g_hRoundBG[11] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_12));
+	//g_hRoundBG[12] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_13));
+	/*g_hRoundBG[13] = LoadBitmap(hinstance,MAKEINTRESOURCE(ROUNDBG_14));*/
 
 	g_hBloodBar = LoadBitmap(hinstance,MAKEINTRESOURCE(BloodBar));
 
@@ -317,7 +317,7 @@ void Game_prePaint(HWND hwnd)
 	}
 	else if(RoundLoading&&GameBegin)
 	{
-		SelectObject(g_hbufdc,g_hRoundBG[(g_roundNumber-1)%14]);
+		SelectObject(g_hbufdc,g_hRoundBG[(g_roundNumber-1)%11]);
 		BitBlt(g_hmdc,0,0,980,1000,g_hbufdc,0,0,SRCCOPY);             //chapter ±³¾°Í¼
 		
 
@@ -332,7 +332,7 @@ void Game_prePaint(HWND hwnd)
 		DeleteObject(hFont);
 		BitBlt(g_hdc,0,0,WINDOW_WIDTH,WINDOW_HEIGHT,g_hmdc,0,0,SRCCOPY);   
 
-		Sleep(3000);
+		/*Sleep(3000);*/
 		RoundLoading = false;
 	}
 	else
@@ -344,6 +344,9 @@ void Game_prePaint(HWND hwnd)
 void Game_turn(HWND hwnd)
 {
 	/*srand((unsigned)time(nullptr));*/
+
+
+
 	RoundLoading = true;
 	pLTank->setLocationX(400);
 	pLTank->setLocationY(400);
@@ -456,7 +459,7 @@ void Game_paint(HWND hwnd)
 		while (aliveNumber<3&&g_turnNumber<20) 
 		{
 			newEnemy[g_turnNumber++]->setIsAlive(true);
-			newEnemy[g_turnNumber-1]->decreaseHP(); /////////////////////////////////////////////////////////////
+			/*newEnemy[g_turnNumber-1]->decreaseHP(); *//////////////////////////////////////////////////////////////
 		
 			aliveNumber++;
 			//if (g_turnNumber==10) ///////////////////////////////////////////////////////
@@ -586,7 +589,7 @@ bool Game_clean(HWND hwnd)
 	DeleteObject(g_hGameOver);
 	DeleteObject(g_hRepalyButton);
 
-	for (int i=0;i<14;i++)
+	for (int i=0;i<11;i++)
 	{
 		DeleteObject(g_hRoundBG[i]);
 	}
